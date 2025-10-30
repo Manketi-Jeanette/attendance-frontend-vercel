@@ -42,7 +42,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App d-flex flex-column min-vh-100">
       <nav className="navbar navbar-dark bg-primary">
         <div className="container">
           <span className="navbar-brand mb-0 h1">Employee Attendance Tracker</span>
@@ -63,7 +63,7 @@ function App() {
         </div>
       </nav>
 
-      <div className="container mt-4">
+      <div className="container mt-4 flex-grow-1">
         {currentView === 'form' && (
           <AttendanceForm onSubmit={handleAttendanceSubmit} />
         )}
@@ -76,6 +76,13 @@ function App() {
           />
         )}
       </div>
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="container">
+          <p className="mb-0">&copy; 2024 Employee Attendance Tracker</p>
+        </div>
+      </footer>
     </div>
   );
 }

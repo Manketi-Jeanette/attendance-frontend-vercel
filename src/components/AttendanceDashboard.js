@@ -34,82 +34,80 @@ const AttendanceDashboard = ({ records, loading, onRefresh }) => {
   }
 
   return (
-    <div className="card">
-      <div className="card-header d-flex justify-content-between align-items-center">
+    <div>
+      <div className="d-flex justify-content-between align-items-center mb-3">
         <h4>Attendance Dashboard</h4>
         <button className="btn btn-secondary" onClick={onRefresh}>
           Refresh
         </button>
       </div>
       
-      <div className="card-body">
-        {/* Bonus Features: Filter and Search */}
-        <div className="row mb-3">
-          <div className="col-md-6">
-            <label htmlFor="filterDate" className="form-label">Filter by Date</label>
-            <input
-              type="date"
-              className="form-control"
-              id="filterDate"
-              value={filterDate}
-              onChange={(e) => setFilterDate(e.target.value)}
-            />
-          </div>
-          <div className="col-md-6">
-            <label htmlFor="searchTerm" className="form-label">Search by Name or ID</label>
-            <input
-              type="text"
-              className="form-control"
-              id="searchTerm"
-              placeholder="Enter name or ID..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
+      {/* Bonus Features: Filter and Search */}
+      <div className="row mb-3">
+        <div className="col-md-6">
+          <label htmlFor="filterDate" className="form-label">Filter by Date</label>
+          <input
+            type="date"
+            className="form-control"
+            id="filterDate"
+            value={filterDate}
+            onChange={(e) => setFilterDate(e.target.value)}
+          />
         </div>
-
-        {filteredRecords.length === 0 ? (
-          <div className="text-center py-4">
-            <p>No attendance records found.</p>
-          </div>
-        ) : (
-          <div className="table-responsive">
-            <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th>Employee Name</th>
-                  <th>Employee ID</th>
-                  <th>Date</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredRecords.map(record => (
-                  <tr key={record.id}>
-                    <td>{record.employeeName}</td>
-                    <td>{record.employeeID}</td>
-                    <td>{record.date}</td>
-                    <td>
-                      <span className={`badge ${record.status === 'Present' ? 'bg-success' : 'bg-danger'}`}>
-                        {record.status}
-                      </span>
-                    </td>
-                    <td>
-                      <button 
-                        className="btn btn-danger btn-sm"
-                        onClick={() => handleDelete(record.id)}
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+        <div className="col-md-6">
+          <label htmlFor="searchTerm" className="form-label">Search by Name or ID</label>
+          <input
+            type="text"
+            className="form-control"
+            id="searchTerm"
+            placeholder="Enter name or ID..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
       </div>
+
+      {filteredRecords.length === 0 ? (
+        <div className="text-center py-4">
+          <p>No attendance records found.</p>
+        </div>
+      ) : (
+        <div className="table-responsive">
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th>Employee Name</th>
+                <th>Employee ID</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredRecords.map(record => (
+                <tr key={record.id}>
+                  <td>{record.employeeName}</td>
+                  <td>{record.employeeID}</td>
+                  <td>{record.date}</td>
+                  <td>
+                    <span className={`badge ${record.status === 'Present' ? 'bg-success' : 'bg-danger'}`}>
+                      {record.status}
+                    </span>
+                  </td>
+                  <td>
+                    <button 
+                      className="btn btn-danger btn-sm"
+                      onClick={() => handleDelete(record.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };
